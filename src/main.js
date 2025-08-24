@@ -32,17 +32,17 @@ function renderTodos() {
       $item.addClass("todo-item-checked");
     }
 
-    // чекбокс
+    // create checkbox
     const $checkbox = $("<input type='checkbox'>").prop("checked", todo.completed);
     $item.append($checkbox);
 
-    // текст
+    // create txt
     const $span = $("<span></span>")
       .addClass("todo-item__description")
       .text(todo.text);
     $item.append($span);
 
-    // кнопка удалить
+    // create button delete
     const $delBtn = $("<button></button>")
       .addClass("todo-item__delete")
       .text("Видалити");
@@ -74,7 +74,6 @@ FormAddBtn.on("click", (e) => {
   renderTodos();
 });
 
-// делегирование событий
 
 // toggle checkbox
 toDoList.on("change", "input[type='checkbox']", function (e) {

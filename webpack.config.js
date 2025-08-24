@@ -1,29 +1,33 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: "./src/main.js",              // твоя точка входа
+  entry: "./src/main.js",
   output: {
-    filename: "bundle.js",
+    filename: "bundle[fullhash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true
   },
-  mode: "development",              // или "production"
+  mode: "development",
    plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html"   // твой шаблон html
-    })
+      template: "./src/index.html"
+    }),
+     new MiniCssExtractPlugin({
+          filename: 'main.css'
+        })
   ],
   module: {
     rules: [
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: "babel-loader"        // уже работает с твоим .babelrc
+        use: "babel-loader"
       },
       {
         test: /\.css$/,            
-        use: ["style-loader", "css-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
